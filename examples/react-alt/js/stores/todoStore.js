@@ -12,7 +12,7 @@ var app = app || {};
 	var Utils = app.Utils;
 	var LOCALSTORAGE_NAMESPACE = 'react-alt-todo';
 
-	var TodoStore = function() {
+	var TodoStore = function () {
 		this.todos = Utils.store(LOCALSTORAGE_NAMESPACE + '.todos');
 		this.nowShowing = Utils.store(LOCALSTORAGE_NAMESPACE + '.nowShowing') || app.ALL_TODOS;
 		this.editing = Utils.store(LOCALSTORAGE_NAMESPACE + '.editing') || null;
@@ -29,21 +29,21 @@ var app = app || {};
 		});
 	};
 
-	TodoStore.prototype.addTodo = function(todo) {
+	TodoStore.prototype.addTodo = function (todo) {
 		this.todos = this.todos.concat(todo);
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.todos', this.todos);
 	};
 
-	TodoStore.prototype.toggleAll = function(checked) {
-		this.todos = this.todos.map(function(todo) {
+	TodoStore.prototype.toggleAll = function (checked) {
+		this.todos = this.todos.map(function (todo) {
 			return Utils.extend({}, todo, {completed: checked});
 		});
 
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.todos', this.todos);
 	};
 
-	TodoStore.prototype.toggle = function(todoToToggle) {
-		this.todos = this.todos.map(function(todo) {
+	TodoStore.prototype.toggle = function (todoToToggle) {
+		this.todos = this.todos.map(function (todo) {
 			return todo !== todoToToggle ?
 				todo :
 				Utils.extend({}, todo, {completed: !todo.completed});
@@ -52,16 +52,16 @@ var app = app || {};
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.todos', this.todos);
 	};
 
-	TodoStore.prototype.destroy = function(todoToDestroy) {
-		this.todos = this.todos.filter(function(todo) {
+	TodoStore.prototype.destroy = function (todoToDestroy) {
+		this.todos = this.todos.filter(function (todo) {
 			return todo !== todoToDestroy;
 		});
 
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.todos', this.todos);
 	};
 
-	TodoStore.prototype.save = function(command) {
-		this.todos = this.todos.map(function(todo) {
+	TodoStore.prototype.save = function (command) {
+		this.todos = this.todos.map(function (todo) {
 			return todo !== command.todoToSave ?
 				todo :
 				Utils.extend({}, command.todoToSave, {title: command.text});
@@ -70,21 +70,21 @@ var app = app || {};
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.todos', this.todos);
 	};
 
-	TodoStore.prototype.clearCompleted = function() {
-		this.todos = this.todos.filter(function(todo) {
+	TodoStore.prototype.clearCompleted = function () {
+		this.todos = this.todos.filter(function (todo) {
 			return !todo.completed;
 		});
 
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.todos', this.todos);
 	};
 
-	TodoStore.prototype.edit = function(id) {
+	TodoStore.prototype.edit = function (id) {
 		this.editing = id;
 
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.editing', this.editing);
 	};
 
-	TodoStore.prototype.show = function(nowShowing) {
+	TodoStore.prototype.show = function (nowShowing) {
 		this.nowShowing = nowShowing;
 
 		Utils.store(LOCALSTORAGE_NAMESPACE + '.nowShowing', this.nowShowing);
@@ -93,4 +93,4 @@ var app = app || {};
 	TodoStore.displayName = 'TodoStore';
 
 	app.todoStore = app.alt.createStore(TodoStore);
-}());
+})();

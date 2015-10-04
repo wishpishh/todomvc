@@ -27,18 +27,18 @@ var app = app || {};
 			TodoStore.listen(this.onStoreChange);
 
 			var router = Router({
-				'/': function() {TodoActions.show(app.ALL_TODOS);},
-				'/active': function() {TodoActions.show(app.ACTIVE_TODOS);},
-				'/completed': function() {TodoActions.show(app.COMPLETED_TODOS);}
+				'/': function () {TodoActions.show(app.ALL_TODOS);},
+				'/active': function () {TodoActions.show(app.ACTIVE_TODOS);},
+				'/completed': function () {TodoActions.show(app.COMPLETED_TODOS);}
 			});
 			router.init('/');
 		},
 
-		componentDidUnmount: function() {
+		componentDidUnmount: function () {
 			TodoStore.unlisten(this.onStoreChange);
 		},
 
-		onStoreChange: function(state) {
+		onStoreChange: function (state) {
 			this.setState(state);
 		},
 
