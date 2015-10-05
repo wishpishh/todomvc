@@ -168,9 +168,6 @@ var app = app || {};
 			);
 		}
 	});
-	
-	React.render(
-		<TodoApp/>,
-		document.getElementsByClassName('todoapp')[0]
-	);
+
+	app.TodoApp = TodoApp;
 })();
